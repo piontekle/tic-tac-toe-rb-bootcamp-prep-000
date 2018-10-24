@@ -21,7 +21,7 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-def move(board, index, current_player = "X")
+def move(board, index, current_player)
   board[index] = current_player
 end
 
@@ -64,4 +64,33 @@ def current_player(board)
   end
 end
 
+def won?(board)
+  WIN_COMBINATIONS.detect do |combination|
+    win_combo = [board[combination[0]], board[combination[1]], board[combination[2]]]
+    if win_combo.all? {|play| play == "X"}
+     return combination
+     elsif win_combo.all? {|play| play == "O"}
+      return combination
+    else
+      false
+    end
+  end
+end
 
+def full?(board)
+  !board.include?(" " || "" || nil)
+end
+
+def draw?(board)
+  !won?(board) && full?(board)
+end
+
+def over?(board)
+  won?(board) || full?(board) || draw?(board)
+end
+
+def winner(board)
+  if won?(board)
+    return board[won?(board)[0]]
+  end
+end
