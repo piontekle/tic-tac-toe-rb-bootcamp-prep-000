@@ -104,6 +104,6 @@ def play(board)
     player = current_player(board)
     puts "Congratulations #{player}!"
   elsif draw?(board)
-    puts "Cats game!"
+    puts "Cat's game!"
   end
 end
